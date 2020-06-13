@@ -30,7 +30,8 @@ public class ResponseWrapper {
         this.response = response;
     }
 
-    public ObjectNode getResult() {
+    public ResponseEntity<?> responseEntity () {
+//    public ObjectNode getResult() {
 //        ErrorList errorListTest = new ErrorList();
 //        Map<String, ErrorCodeValue> errorCodeValuesTest = errorListTest.getErrorCodeValueMap();
 //        System.out.println("get from status "+errorCodeValuesTest.get("unknown phone number").getStatus());
@@ -44,30 +45,48 @@ public class ResponseWrapper {
             JsonNode jsonNode = objectMapper.readTree(response);
             if (queue.equals("verifyPin") && jsonNode.get("email") != null) {
                 session.setAttribute("userId", jsonNode.get("id"));
-                objectNode.put("status", code).put("message", message);
-            } else if(queue.equals("verify-otp")) {
-
+                objectNode.put("code", code).put("message", message);
+                return new ResponseEntity<>(objectNode, HttpStatus.OK);
             }
-            else if (queue.equals("send-otp")) {
-                objectNode.put("status", code).put("message", message);
+            else if(queue.equals("changepin-otp")) {
+                ObjectNode data = objectMapper.createObjectNode();
+                data = (ObjectNode) jsonNode;
+                data.remove("createdAt");
+                data.remove("updatedAt");
+                data.remove("code");
+                data.remove("id");
+                objectNode.put("code", code).put("message", message).set("data", jsonNode);
+                return new ResponseEntity<>(objectNode, HttpStatus.OK);
+            }
+            else if(queue.equals("verify-otp")) {
+                session.setAttribute("userId", jsonNode.get("userId"));
+                objectNode.put("code", code).put("message", message);
+                return new ResponseEntity<>(objectNode, HttpStatus.OK);
+            }
+            else if (queue.equals("forgotpin-otp")) {
+                objectNode.put("code", code).put("message", message);
+                return new ResponseEntity<>(objectNode, HttpStatus.OK);
             }
             else {
-                objectNode.put("status", code).put("message", message).set("data", jsonNode);
+                objectNode.put("code", code).put("message", message).set("data", jsonNode);
+                return new ResponseEntity<>(objectNode, message == "created"?HttpStatus.CREATED:HttpStatus.OK);
             }
         } catch (JsonProcessingException e) {
             System.out.println("Not Success");
             ErrorList errorList = new ErrorList();
             ErrorCodeValue errorCodeValue = errorList.getErrorCodeValueMap().get(response);
             if (errorCodeValue != null) {
-                objectNode.put("status", errorCodeValue.getStatus()).put("message", errorCodeValue.getMessage());
+                objectNode.put("code", errorCodeValue.getStatus()).put("message", errorCodeValue.getMessage());
+                return new ResponseEntity<>(objectNode, errorCodeValue.getHttpStatusCode());
             } else {
-                objectNode.put("status", 500).put("message", "unexpected error");
+                objectNode.put("code", 500).put("message", response);
+                return new ResponseEntity<>(objectNode, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
-        return objectNode;
-    }
-
-    public ResponseEntity<?> responseEntity () {
-        return new ResponseEntity<>(getResult(), HttpStatus.OK);
+//        return objectNode;
+//    }
+//
+//    public ResponseEntity<?> responseEntity () {
+//        return new ResponseEntity<>(objectNode, HttpStatus.OK);
     }
 }

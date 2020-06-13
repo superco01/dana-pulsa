@@ -9,5 +9,5 @@ public class RequestVerifyOtp {
     @NotNull(message = "user ID must not be null")
     private long id;
     @NotNull(message = "otp code must not be null")
-    private String otp;
+    private String code;
 }

@@ -1,6 +1,7 @@
 package com.debrief2.pulsa.mobile.config.auth;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;

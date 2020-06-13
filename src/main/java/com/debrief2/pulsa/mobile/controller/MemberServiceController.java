@@ -85,7 +85,7 @@ public class MemberServiceController {
     public ResponseEntity<?> forgotPinOtp(@Valid @RequestBody RequestUserId requestUserId) {
         String response = rpcPublisher.sendMessage(memberQueueName.getSendOTP(), String.valueOf(requestUserId.getId()));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
-        responseWrapper.setQueue("send-otp");
+        responseWrapper.setQueue("forgotpin-otp");
         return responseWrapper.responseEntity();
     }
 
@@ -93,14 +93,16 @@ public class MemberServiceController {
     public ResponseEntity<?> changePinOtp(HttpSession httpSession) {
         String response = rpcPublisher.sendMessage(memberQueueName.getSendOTP(), String.valueOf(httpSession.getAttribute("userId")));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setQueue("changepin-otp");
         return responseWrapper.responseEntity();
     }
 
     @SneakyThrows
     @PostMapping(value = "/verify-otp")
-    public ResponseEntity<?> verifyOtp(@Valid @RequestBody RequestVerifyOtp requestVerifyOtp) {
+    public ResponseEntity<?> verifyOtp(@Valid @RequestBody RequestVerifyOtp requestVerifyOtp, HttpSession httpSession) {
         String response = rpcPublisher.sendMessage(memberQueueName.getVerifyOTP(), objectMapper.writeValueAsString(requestVerifyOtp));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setSession(httpSession);
         responseWrapper.setQueue("verify-otp");
         return responseWrapper.responseEntity();
     }
