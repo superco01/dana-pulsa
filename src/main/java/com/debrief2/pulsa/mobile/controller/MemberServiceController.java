@@ -40,9 +40,11 @@ public class MemberServiceController {
     @SneakyThrows
     @PostMapping(value = "/register")
     public ResponseEntity<?> register(@Valid @RequestBody RequestRegister requestRegister) {
+        System.out.println(requestRegister);
         String response = rpcPublisher.sendMessage(memberQueueName.getRegister(), objectMapper.writeValueAsString(requestRegister));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
         responseWrapper.setMessage("created");
+        responseWrapper.setCode(201);
         return responseWrapper.responseEntity();
     }
 

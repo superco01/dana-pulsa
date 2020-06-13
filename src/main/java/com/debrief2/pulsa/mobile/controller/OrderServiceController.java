@@ -61,6 +61,7 @@ public class OrderServiceController {
         String response = rpcPublisher.sendMessage(orderQueueName.getCreateTransaction(), objectMapper.writeValueAsString(requestOrder));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
         responseWrapper.setMessage("created");
+        responseWrapper.setCode(201);
         return responseWrapper.responseEntity();    }
 
     @SneakyThrows

@@ -43,26 +43,26 @@ public class ResponseWrapper {
         System.out.println("RESPONSE MESSAGE = "+response);
         try {
             JsonNode jsonNode = objectMapper.readTree(response);
-            if (queue.equals("verifyPin") && jsonNode.get("email") != null) {
+            if (queue.equals("verifyPin") || queue.equals("verify-otp") && jsonNode.get("email") != null) {
                 session.setAttribute("userId", jsonNode.get("id"));
                 objectNode.put("code", code).put("message", message);
                 return new ResponseEntity<>(objectNode, HttpStatus.OK);
             }
-            else if(queue.equals("changepin-otp")) {
-                ObjectNode data = objectMapper.createObjectNode();
-                data = (ObjectNode) jsonNode;
-                data.remove("createdAt");
-                data.remove("updatedAt");
-                data.remove("code");
-                data.remove("id");
-                objectNode.put("code", code).put("message", message).set("data", jsonNode);
-                return new ResponseEntity<>(objectNode, HttpStatus.OK);
-            }
-            else if(queue.equals("verify-otp")) {
-                session.setAttribute("userId", jsonNode.get("userId"));
-                objectNode.put("code", code).put("message", message);
-                return new ResponseEntity<>(objectNode, HttpStatus.OK);
-            }
+//            else if(queue.equals("changepin-otp")) {
+//                ObjectNode data = objectMapper.createObjectNode();
+//                data = (ObjectNode) jsonNode;
+//                data.remove("createdAt");
+//                data.remove("updatedAt");
+//                data.remove("code");
+//                data.remove("id");
+//                objectNode.put("code", code).put("message", message).set("data", jsonNode);
+//                return new ResponseEntity<>(objectNode, HttpStatus.OK);
+//            }
+//            else if(queue.equals("verify-otp")) {
+//                session.setAttribute("userId", jsonNode.get("userId"));
+//                objectNode.put("code", code).put("message", message);
+//                return new ResponseEntity<>(objectNode, HttpStatus.OK);
+//            }
             else if (queue.equals("forgotpin-otp")) {
                 objectNode.put("code", code).put("message", message);
                 return new ResponseEntity<>(objectNode, HttpStatus.OK);

@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -40,25 +42,35 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, headers, status);
     }
 
-    protected ResponseEntity<Object> handleHttpClient(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status, WebRequest request) {
+//    @ExceptionHandler(Exception.class)
+//    protected ResponseEntity<Object> handleMethodArgumentNotValids(Exception ex,
+//                                                                   HttpHeaders headers,
+//                                                                   HttpStatus status, WebRequest request) {
+//
+//        Map<String, Object> body = new LinkedHashMap<>();
+////        body.put("timestamp", new Date());
+//        body.put("code", status.value());
+//
+//        //Get all errors
+////        List<String> errors = ex.getBindingResult()
+////                .getFieldErrors()
+////                .stream()
+////                .map(x -> x.getDefaultMessage())
+////                .collect(Collectors.toList());
+//
+//        body.put("message", "errors");
+//
+//        return new ResponseEntity<>(body, headers, status);
+//    }
 
-        Map<String, Object> body = new LinkedHashMap<>();
-//        body.put("timestamp", new Date());
-        body.put("code", status.value());
-
-        //Get all errors
-        List<String> errors = ex.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .map(x -> x.getDefaultMessage())
-                .collect(Collectors.toList());
-
-        body.put("message", errors);
-
-        return new ResponseEntity<>(body, headers, status);
-    }
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    @ExceptionHandler(NullPointerException.class)
+//    public ResponseEntity<ErrorResponse> handleUnknownException(Exception ex, WebRequest request) {
+//        List<String> details = new ArrayList<>();
+//        details.add(ex.getLocalizedMessage());
+//        ErrorResponse error = new ErrorResponse(INCORRECT_REQUEST, details);
+//        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+//    }
 
     @ExceptionHandler(RecordNotFoundException.class)
     public final ResponseEntity<ErrorResponse> handleUserNotFoundException
