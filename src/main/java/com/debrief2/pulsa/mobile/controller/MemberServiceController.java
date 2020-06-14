@@ -6,6 +6,7 @@ import com.debrief2.pulsa.mobile.utils.rpc.RpcPublisher;
 import com.debrief2.pulsa.mobile.utils.rpc.queuename.MemberQueueName;
 import com.debrief2.pulsa.mobile.utils.rpc.queuename.OrderQueueName;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -121,7 +122,7 @@ public class MemberServiceController {
     @DeleteMapping(value = "/logout")
     public ResponseEntity<?> logout(HttpSession httpSession) {
         httpSession.invalidate();
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(objectMapper.createObjectNode().put("code", 204).put("message", "success"), HttpStatus.OK);
     }
 
     @GetMapping(value = "/otp/{id}")
