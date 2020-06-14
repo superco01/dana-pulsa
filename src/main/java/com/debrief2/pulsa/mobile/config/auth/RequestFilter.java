@@ -34,7 +34,7 @@ public class RequestFilter extends OncePerRequestFilter {
                 path.equals("/api/verify-otp") ||
 //                path.equals("/api/change-pin") ||
                 path.contains("/api/otp/")) {
-            session.setAttribute("userId", 1);
+//            session.setAttribute("userId", 1);
             filterChain.doFilter(httpServletRequest, httpServletResponse);
         }
         else {
