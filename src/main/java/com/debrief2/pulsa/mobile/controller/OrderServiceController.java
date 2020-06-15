@@ -24,21 +24,21 @@ public class OrderServiceController {
     @Autowired
     private OrderQueueName orderQueueName;
 
-//    @Autowired
-//    private RpcPublisher rpcPublisher;
+    @Autowired
+    private RpcPublisher rpcPublisher;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    RpcPublisher rpcPublisher;
-
-    {
-        try {
-            rpcPublisher = new RpcPublisher("amqp://jeniyqrm:hHDvRyHfYMdmD48o_oGOzSMgrGK4bTvJ@jellyfish.rmq.cloudamqp.com/jeniyqrm");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    RpcPublisher rpcPublisher;
+//
+//    {
+//        try {
+//            rpcPublisher = new RpcPublisher("amqp://jeniyqrm:hHDvRyHfYMdmD48o_oGOzSMgrGK4bTvJ@jellyfish.rmq.cloudamqp.com/jeniyqrm");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @GetMapping(value = "/recent-number")
     public ResponseEntity<?> getRecentNumber(HttpSession httpSession) {

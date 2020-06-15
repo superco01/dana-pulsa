@@ -48,7 +48,7 @@ public class ResponseWrapper {
                 objectNode.put("code", code).put("message", message);
                 return new ResponseEntity<>(objectNode, HttpStatus.OK);
             }
-            else if(queue.equals("changepin-otp")) {
+            else if(queue.equals("change-pin")) {
                 ErrorList errorList = new ErrorList();
                 ErrorCodeValue errorCodeValue = errorList.getErrorCodeValueMap().get(response);
                 if (errorCodeValue != null) {
@@ -72,10 +72,20 @@ public class ResponseWrapper {
                 return new ResponseEntity<>(objectNode, message == "created"?HttpStatus.CREATED:HttpStatus.OK);
             }
         } catch (JsonProcessingException e) {
-            System.out.println("Not Success");
+            System.out.println("Catch");
             ErrorList errorList = new ErrorList();
             ErrorCodeValue errorCodeValue = errorList.getErrorCodeValueMap().get(response);
-            if (errorCodeValue != null) {
+            if(queue.equals("change-pin")) {
+//                ErrorList errorList = new ErrorList();
+//                ErrorCodeValue errorCodeValue = errorList.getErrorCodeValueMap().get(response);
+                if (errorCodeValue != null) {
+                    objectNode.put("code", errorCodeValue.getStatus()).put("message", errorCodeValue.getMessage());
+                    return new ResponseEntity<>(objectNode, errorCodeValue.getHttpStatusCode());
+                }
+                objectNode.put("code", code).put("message", response);
+                return new ResponseEntity<>(objectNode, HttpStatus.OK);
+            }
+            else if (errorCodeValue != null) {
                 objectNode.put("code", errorCodeValue.getStatus()).put("message", errorCodeValue.getMessage());
                 return new ResponseEntity<>(objectNode, errorCodeValue.getHttpStatusCode());
             } else {

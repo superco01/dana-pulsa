@@ -9,5 +9,5 @@ public class RequestVerifyPinLogin {
     @NotNull(message = "id cannot be null")
     private long id;
     @NotNull(message = "pin cannot be null")
-    private int pin;
+    private String pin;
 }

@@ -8,5 +8,5 @@ import javax.validation.constraints.NotNull;
 public class RequestPin {
     private long id;
     @NotNull(message = "pin must not be null")
-    private int pin;
+    private String pin;
 }

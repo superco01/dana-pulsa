@@ -3,6 +3,7 @@ package com.debrief2.pulsa.mobile.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -15,5 +16,5 @@ public class RequestRegister {
     @NotNull(message = "phone must not be null")
     private String phone;
     @NotNull(message = "pin must not be null")
-    private int pin;
+    private String pin;
 }

@@ -22,26 +22,26 @@ public class MemberServiceController {
     @Autowired
     private MemberQueueName memberQueueName;
 
-//    @Autowired
-//    private RpcPublisher rpcPublisher;
+    @Autowired
+    private RpcPublisher rpcPublisher;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    RpcPublisher rpcPublisher;
+//    RpcPublisher rpcPublisher;
+//
+//    {
+//        try {
+//            rpcPublisher = new RpcPublisher("amqp://lbfcxugj:eW3yKsOA0FIKKBSzuQz3dVyx5izT0C-8@toad.rmq.cloudamqp.com/lbfcxugj");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    {
-        try {
-            rpcPublisher = new RpcPublisher("amqp://lbfcxugj:eW3yKsOA0FIKKBSzuQz3dVyx5izT0C-8@toad.rmq.cloudamqp.com/lbfcxugj");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @SneakyThrows
+//    @SneakyThrows
     @PostMapping(value = "/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RequestRegister requestRegister) {
-        System.out.println(requestRegister);
+    public ResponseEntity<?> register(@Valid @RequestBody RequestRegister requestRegister) throws Exception{
+        System.out.println("Request write as string = "+objectMapper.writeValueAsString(requestRegister));
         String response = rpcPublisher.sendMessage(memberQueueName.getRegister(), objectMapper.writeValueAsString(requestRegister));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
         responseWrapper.setMessage("created");
@@ -56,9 +56,9 @@ public class MemberServiceController {
         return responseWrapper.responseEntity();
     }
 
-    @SneakyThrows
+//    @SneakyThrows
     @PostMapping(value = "verifypin-login")
-    public ResponseEntity<?> verifyPinLogin(@Valid @RequestBody RequestVerifyPinLogin requestVerifyPinLogin, HttpSession httpSession) {
+    public ResponseEntity<?> verifyPinLogin(@Valid @RequestBody RequestVerifyPinLogin requestVerifyPinLogin, HttpSession httpSession) throws Exception {
         String response = rpcPublisher.sendMessage(memberQueueName.getVerifyPin(), objectMapper.writeValueAsString(requestVerifyPinLogin));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
         responseWrapper.setSession(httpSession);
@@ -116,6 +116,7 @@ public class MemberServiceController {
         requestPin.setId(Long.parseLong(String.valueOf(httpSession.getAttribute("userId"))));
         String response = rpcPublisher.sendMessage(memberQueueName.getChangePin(), objectMapper.writeValueAsString(requestPin));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setQueue("change-pin");
         return responseWrapper.responseEntity();
     }
 

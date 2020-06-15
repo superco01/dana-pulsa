@@ -32,21 +32,21 @@ public class PromotionServiceController {
     @Autowired
     private PromotionQueueName promotionQueueName;
 
-//    @Autowired
-//    private RpcPublisher rpcPublisher;
+    @Autowired
+    private RpcPublisher rpcPublisher;
 
     @Autowired
     private ObjectMapper objectMapper;
 //
-    RpcPublisher rpcPublisher;
-
-    {
-        try {
-            rpcPublisher = new RpcPublisher("amqp://tfgupaen:DKiggzp1uqZP7do96IFUFgW-SOPNCDl0@emu.rmq.cloudamqp.com/tfgupaen");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    RpcPublisher rpcPublisher;
+//
+//    {
+//        try {
+//            rpcPublisher = new RpcPublisher("amqp://tfgupaen:DKiggzp1uqZP7do96IFUFgW-SOPNCDl0@emu.rmq.cloudamqp.com/tfgupaen");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @SneakyThrows
     @GetMapping(value = "/my-vouchers/{page}")

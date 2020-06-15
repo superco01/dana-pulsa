@@ -24,7 +24,7 @@ import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-//@Component
+@Component
 public class RpcPublisher {
     private ConnectionFactory connectionFactory;
     private Channel channel;
@@ -37,8 +37,8 @@ public class RpcPublisher {
 //    private String exchangeName;
 //@Value("${cloudamqp.url}")
 
-//@Autowired
-    public RpcPublisher(String url) throws Exception {
+//    @Autowired
+    public RpcPublisher(@Value("${cloudamqp.url}") String url) throws Exception {
         connectionFactory = new ConnectionFactory();
         connectionFactory.setUri(url);
 //        connectionFactory.setHost("localhost");
