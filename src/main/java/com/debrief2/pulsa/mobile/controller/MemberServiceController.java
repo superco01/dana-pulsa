@@ -123,7 +123,7 @@ public class MemberServiceController {
     @DeleteMapping(value = "/logout")
     public ResponseEntity<?> logout(HttpSession httpSession) {
         httpSession.invalidate();
-        return new ResponseEntity<>(objectMapper.createObjectNode().put("code", 204).put("message", "success"), HttpStatus.OK);
+        return new ResponseEntity<>(objectMapper.createObjectNode().put("code", 200).put("message", "success"), HttpStatus.OK);
     }
 
     @GetMapping(value = "/otp/{id}")
