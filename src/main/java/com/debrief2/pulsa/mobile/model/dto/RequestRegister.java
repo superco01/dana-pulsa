@@ -4,17 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 public class RequestRegister {
-    @NotNull(message = "name must not be null")
+    @NotBlank(message = "name must not be null")
     private String name;
-    @NotNull(message = "email must not be null")
+    @NotBlank(message = "email must not be null")
     private String email;
-    @NotNull(message = "phone must not be null")
+    @NotBlank(message = "phone must not be null")
     private String phone;
-    @NotNull(message = "pin must not be null")
+    @NotBlank(message = "pin must not be null")
     private String pin;
 }

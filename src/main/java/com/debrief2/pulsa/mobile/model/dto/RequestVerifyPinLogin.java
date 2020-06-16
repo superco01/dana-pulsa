@@ -2,12 +2,13 @@ package com.debrief2.pulsa.mobile.model.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
 public class RequestVerifyPinLogin {
-    @NotNull(message = "id cannot be null")
+    @NotBlank(message = "id must not be null")
     private String id;
-    @NotNull(message = "pin cannot be null")
+    @NotBlank(message = "pin must not be null")
     private String pin;
 }
