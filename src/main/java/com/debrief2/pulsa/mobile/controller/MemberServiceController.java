@@ -86,7 +86,6 @@ public class MemberServiceController {
         return responseWrapper.responseEntity();
     }
 
-    @SneakyThrows
     @PostMapping(value = "/forgotpin-otp")
     public ResponseEntity<?> forgotPinOtp(@Valid @RequestBody RequestUserId requestUserId) {
         String response = rpcPublisher.sendMessage(memberQueueName.getSendOTP(), String.valueOf(requestUserId.getId()));
@@ -130,7 +129,7 @@ public class MemberServiceController {
     }
 
     @GetMapping(value = "/otp/{id}")
-    public ResponseEntity<?> getBalance(@PathVariable("id") @NotNull(message = "ID must not be null") long id) {
+    public ResponseEntity<?> getBalance(@PathVariable("id") @NotNull(message = "ID must not be null") String id) {
         String response = rpcPublisher.sendMessage(memberQueueName.getGetOTP(), String.valueOf(id));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
         return responseWrapper.responseEntity();
