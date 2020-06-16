@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class RequestOrder {
     @NotBlank(message = "user id must not be null")
-    private long userId;
+    private String userId;
     @NotBlank(message = "phone number must not be null")
     private String phoneNumber;
     @NotBlank(message = "catalog ID must not be null")
-    private int catalogId;
+    private String catalogId;
 }

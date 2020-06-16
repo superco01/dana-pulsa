@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class RequestHistory {
     @NotBlank(message = "user id must not be null")
-    private long userId;
-    @NotBlank(message = "page cannot be null")
+    private String userId;
+//    @NotBlank(message = "page cannot be null")
     private int page;
 }

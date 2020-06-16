@@ -67,6 +67,11 @@ public class ResponseWrapper {
                 objectNode.put("code", code).put("message", message);
                 return new ResponseEntity<>(objectNode, HttpStatus.OK);
             }
+            else if (queue.equals("register") && jsonNode.get("email") != null) {
+                session.setAttribute("userId", jsonNode.get("id"));
+                objectNode.put("code", 201).put("message", "created");
+                return new ResponseEntity<>(objectNode, HttpStatus.OK);
+            }
             else {
                 objectNode.put("code", code).put("message", message).set("data", jsonNode);
                 return new ResponseEntity<>(objectNode, message == "created"?HttpStatus.CREATED:HttpStatus.OK);

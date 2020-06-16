@@ -8,11 +8,11 @@ import javax.validation.constraints.NotNull;
 @Data
 public class RequestPay {
     @NotBlank(message = "user id must not be null")
-    private long userId;
+    private String userId;
     @NotBlank(message = "transaction ID must not be null")
-    private int transactionId;
+    private String transactionId;
     @NotBlank(message = "method ID must not be null")
-    private int methodId;
+    private String methodId;
     @NotBlank(message = "voucher ID must not be null")
-    private  int voucherId;
+    private String voucherId;
 }

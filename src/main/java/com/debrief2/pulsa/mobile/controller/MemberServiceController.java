@@ -43,12 +43,12 @@ public class MemberServiceController {
 
 //    @SneakyThrows
     @PostMapping(value = "/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RequestRegister requestRegister) throws Exception{
+    public ResponseEntity<?> register(@Valid @RequestBody RequestRegister requestRegister, HttpSession httpSession) throws Exception{
         System.out.println("Request write as string = "+objectMapper.writeValueAsString(requestRegister));
         String response = rpcPublisher.sendMessage(memberQueueName.getRegister(), objectMapper.writeValueAsString(requestRegister));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
-        responseWrapper.setMessage("created");
-        responseWrapper.setCode(201);
+        responseWrapper.setQueue("register");
+        responseWrapper.setSession(httpSession);
         return responseWrapper.responseEntity();
     }
 
@@ -61,7 +61,7 @@ public class MemberServiceController {
 
 //    @SneakyThrows
     @PostMapping(value = "verifypin-login")
-    public ResponseEntity<?> verifyPinLogin(@Valid @RequestBody RequestVerifyPinLogin requestVerifyPinLogin, HttpSession httpSession) throws JsonProcessingException, InvalidFormatException {
+    public ResponseEntity<?> verifyPinLogin(@Valid @RequestBody RequestVerifyPinLogin requestVerifyPinLogin, HttpSession httpSession) throws JsonProcessingException {
         String response = rpcPublisher.sendMessage(memberQueueName.getVerifyPin(), objectMapper.writeValueAsString(requestVerifyPinLogin));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
         responseWrapper.setSession(httpSession);
