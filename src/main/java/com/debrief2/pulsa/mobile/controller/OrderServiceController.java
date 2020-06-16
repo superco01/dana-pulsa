@@ -75,7 +75,7 @@ public class OrderServiceController {
 
     @SneakyThrows
     @GetMapping(value = "/transaction/in-progress/{page}")
-    public ResponseEntity<?> getTransactionInProgress(@PathVariable("page") @NotNull(message = "page must not be null") int page, HttpSession httpSession) {
+    public ResponseEntity<?> getTransactionInProgress(@PathVariable("page") @NotNull(message = "page must not be null") String page, HttpSession httpSession) {
         RequestHistory requestHistory = new RequestHistory((String.valueOf(httpSession.getAttribute("userId"))), page);
         String response = rpcPublisher.sendMessage(orderQueueName.getGetHistoryInProgress(), objectMapper.writeValueAsString(requestHistory));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
@@ -83,7 +83,7 @@ public class OrderServiceController {
 
     @SneakyThrows
     @GetMapping(value = "/transaction/completed/{page}")
-    public ResponseEntity<?> getTransactionCompleted(@PathVariable("page") @NotNull(message = "page must not be null") int page, HttpSession httpSession) {
+    public ResponseEntity<?> getTransactionCompleted(@PathVariable("page") @NotNull(message = "page must not be null") String page, HttpSession httpSession) {
         RequestHistory requestHistory = new RequestHistory((String.valueOf(httpSession.getAttribute("userId"))), page);
         String response = rpcPublisher.sendMessage(orderQueueName.getGetHistoryCompleted(), objectMapper.writeValueAsString(requestHistory));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
@@ -92,7 +92,7 @@ public class OrderServiceController {
 
     @SneakyThrows
     @GetMapping(value = "/transaction/details/{id}")
-    public ResponseEntity<?> getTransactionDetails(@PathVariable("id") @NotNull(message = "transaction ID must not be null") long id, HttpSession httpSession) {
+    public ResponseEntity<?> getTransactionDetails(@PathVariable("id") @NotNull(message = "transaction ID must not be null") String id, HttpSession httpSession) {
         ObjectNode serviceReq = objectMapper.createObjectNode();
         serviceReq.put("userId", String.valueOf(httpSession.getAttribute("userId"))).put("transactionId", id);
         String message = objectMapper.writeValueAsString(serviceReq);
