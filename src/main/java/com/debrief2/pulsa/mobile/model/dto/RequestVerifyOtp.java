@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class RequestVerifyOtp {
     @NotNull(message = "user ID must not be null")
-    private long id;
+    private String id;
     @NotNull(message = "otp code must not be null")
     private String code;
 }

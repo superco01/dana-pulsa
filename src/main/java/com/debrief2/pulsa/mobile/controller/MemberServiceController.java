@@ -5,12 +5,15 @@ import com.debrief2.pulsa.mobile.utils.ResponseWrapper;
 import com.debrief2.pulsa.mobile.utils.rpc.RpcPublisher;
 import com.debrief2.pulsa.mobile.utils.rpc.queuename.MemberQueueName;
 import com.debrief2.pulsa.mobile.utils.rpc.queuename.OrderQueueName;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -58,7 +61,7 @@ public class MemberServiceController {
 
 //    @SneakyThrows
     @PostMapping(value = "verifypin-login")
-    public ResponseEntity<?> verifyPinLogin(@Valid @RequestBody RequestVerifyPinLogin requestVerifyPinLogin, HttpSession httpSession) throws Exception {
+    public ResponseEntity<?> verifyPinLogin(@Valid @RequestBody RequestVerifyPinLogin requestVerifyPinLogin, HttpSession httpSession) throws JsonProcessingException, InvalidFormatException {
         String response = rpcPublisher.sendMessage(memberQueueName.getVerifyPin(), objectMapper.writeValueAsString(requestVerifyPinLogin));
         ResponseWrapper responseWrapper = new ResponseWrapper(response);
         responseWrapper.setSession(httpSession);

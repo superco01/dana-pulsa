@@ -7,5 +7,5 @@ import javax.validation.constraints.NotNull;
 @Data
 public class RequestUserId {
     @NotNull(message = "user id must not be null")
-    private long id;
+    private String id;
 }

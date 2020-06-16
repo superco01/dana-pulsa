@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class RequestVerifyPinLogin {
     @NotNull(message = "id cannot be null")
-    private long id;
+    private String id;
     @NotNull(message = "pin cannot be null")
     private String pin;
 }
