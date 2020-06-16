@@ -8,50 +8,19 @@
       </path>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:mobile" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:order" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
     <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="224d3028-d806-400f-84e8-16758d83f32c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/config/auth/RequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/config/auth/RequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/controller/MemberServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/controller/MemberServiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/controller/OrderServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/controller/OrderServiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/exception/CustomGlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/exception/CustomGlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestPay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestPay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestVerifyPinLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestVerifyPinLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +35,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1d1O4tBJajsEmzdbq6IiFZTLMhh" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
