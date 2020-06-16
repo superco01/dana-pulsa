@@ -22,7 +22,7 @@ public class RequestFilter extends OncePerRequestFilter {
         System.out.println("Filter Request Path " + path);
         System.out.println("Filter Request " + session.getId());
         System.out.println("Filter request "+session.getAttribute("userId"));
-        session.setAttribute("userId", 1);
+//        session.setAttribute("userId", 1);
 
         if (session.getAttribute("userId") != null) {
             filterChain.doFilter(httpServletRequest, httpServletResponse);
