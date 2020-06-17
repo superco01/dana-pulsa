@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class RequestPay {
-    @NotBlank(message = "user id must not be null")
+//    @NotBlank(message = "user id must not be null")
     private String userId;
     @NotBlank(message = "transaction ID must not be null")
     private String transactionId;

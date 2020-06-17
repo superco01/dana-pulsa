@@ -70,7 +70,7 @@ public class RpcPublisher {
     }
 
     public String sendMessage(String queueName, String message) {
-
+        System.out.println("message to send = " + message);
         final String corrId = UUID.randomUUID().toString();
 
         String replyQueueName = null;

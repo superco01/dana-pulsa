@@ -1,10 +1,9 @@
 package com.debrief2.pulsa.mobile.config.auth;
 
-import org.springframework.http.HttpStatus;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -39,18 +38,22 @@ public class RequestFilter extends OncePerRequestFilter {
         }
         else {
             System.out.println("USER CREDENTIALS FAILED");
-//            throw new ResponseStatusException(HttpStatus.SC_UNAUTHORIZED, "exception on filter");
+//            throw new InvalidCredentialsException(111111);
 //            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
             httpServletResponse.setContentType("application/json");
             httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            httpServletResponse.getOutputStream().println("{ \"code\": 401, \"message\": \"Unauthorized\" }");
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectNode objectNode = objectMapper.createObjectNode();
+            objectNode.put("code", 401).put("message", "Unauthorized");
+            httpServletResponse.getOutputStream().println(objectMapper.writeValueAsString(objectNode));
         }
 
 //        try {
 //            System.out.println("TRY");
-//            session.getAttribute("userIdd");
+//            session.getAttribute("userId");
 //            System.out.println(session.getAttribute("userId"));
-//        } catch (Exception e) {
+//            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized with catch");
+//            filterChain.doFilter(httpServletRequest, httpServletResponse);
 //            System.out.println("CATCH");
 //            if (path.contains("/api/login/") ||
 //                    path.equals("/api/verifypin-login") ||
@@ -62,12 +65,11 @@ public class RequestFilter extends OncePerRequestFilter {
 ////            session.setAttribute("userId", 1);
 //                filterChain.doFilter(httpServletRequest, httpServletResponse);
 //            }
-//            else {
-//                System.out.println("USER CREDENTIALS FAILED");
-//                throw new ResponseStatusException(HttpStatus.OK, "exception on filter", e);
-////                httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-//            }
+//        } catch (AuthenticationException e) {
+//            System.out.println("USER CREDENTIALS FAILED");
+//            httpServletResponse.getWriter().write("credentials failed");
+////                throw new ResponseStatusException(HttpStatus.OK, "exception on filter", e);
+//            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
 //        }
-
     }
 }

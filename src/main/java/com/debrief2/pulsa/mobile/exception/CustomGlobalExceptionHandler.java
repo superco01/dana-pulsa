@@ -17,6 +17,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.UnexpectedTypeException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,10 +27,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler{
+public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private String INCORRECT_REQUEST = "INCORRECT_REQUEST";
     private String BAD_REQUEST = "BAD_REQUEST";
 
+//    @ExceptionHandler(UnexpectedTypeException.class)
+//    public Object springHandleNotFound(UnexpectedTypeException ex) {
+//        System.out.println("handled in controller advice");
+//        return ex;
+//    }
+//
 //    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
 //    public Object handleValidationExceptions(MethodArgumentTypeMismatchException ex) {
 //        return ex.getLocalizedMessage();

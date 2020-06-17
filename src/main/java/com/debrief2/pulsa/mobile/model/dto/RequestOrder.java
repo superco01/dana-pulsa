@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class RequestOrder {
-    @NotBlank(message = "user id must not be null")
+//    @NotBlank(message = "user id must not be null")
     private String userId;
     @NotBlank(message = "phone number must not be null")
     private String phoneNumber;
