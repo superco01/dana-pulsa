@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="224d3028-d806-400f-84e8-16758d83f32c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/config/auth/RequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/config/auth/RequestFilter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -39,8 +39,11 @@ public class RequestFilter extends OncePerRequestFilter {
         }
         else {
             System.out.println("USER CREDENTIALS FAILED");
-//            throw new ResponseStatusException(HttpStatus.OK, "exception on filter");
-            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+//            throw new ResponseStatusException(HttpStatus.SC_UNAUTHORIZED, "exception on filter");
+//            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+            httpServletResponse.setContentType("application/json");
+            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            httpServletResponse.getOutputStream().println("{ \"code\": 401, \"message\": \"Unauthorized\" }");
         }
 
 //        try {
