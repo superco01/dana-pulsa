@@ -22,7 +22,7 @@ public class Register implements Strategy {
         ObjectNode objectNode = objectMapper.createObjectNode();
         session.setAttribute("userId", jsonNode.get("id"));
         objectNode.put("code", 201).put("message", message).set("data", jsonNode);
-        return new ResponseEntity<>(objectNode, HttpStatus.OK);
+        return new ResponseEntity<>(objectNode, HttpStatus.CREATED);
     }
 
     @Override
