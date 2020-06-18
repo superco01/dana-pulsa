@@ -23,6 +23,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+<!--    Spring Boot Security-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
     <!--		AMQP Spring Boot-->
 <!--    <dependency>-->
 <!--      <groupId>org.springframework.boot</groupId>-->
@@ -46,16 +51,16 @@
       <artifactId>spring-rabbit</artifactId>
 <!--      <version>1.4.5.RELEASE</version>-->
     </dependency>
-<!--&lt;!&ndash;    Session Redis&ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.session</groupId>-->
-<!--      <artifactId>spring-session-data-redis</artifactId>-->
-<!--    </dependency>-->
-<!--&lt;!&ndash;    Redis&ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.boot</groupId>-->
-<!--      <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--    </dependency>-->
+<!--    Session Redis-->
+    <dependency>
+      <groupId>org.springframework.session</groupId>
+      <artifactId>spring-session-data-redis</artifactId>
+    </dependency>
+<!--    Redis-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
 <!--    Validation-->
     <dependency>
       <groupId>org.springframework.boot</groupId>

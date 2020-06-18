@@ -10,11 +10,15 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.security.Principal;
 
 @RestController()
 public class MemberServiceController {
@@ -46,7 +50,7 @@ public class MemberServiceController {
         String response = rpcPublisher.sendMessage(memberQueueName.getRegister(), objectMapper.writeValueAsString(requestRegister));
         responseWrapper.setResponse(response);
         responseWrapper.setSession(httpSession);
-        responseWrapper.setStrategy("setCredentials");
+        responseWrapper.setStrategy(memberQueueName.getRegister());
         return responseWrapper.responseEntity();
     }
 
@@ -60,10 +64,11 @@ public class MemberServiceController {
 //    @SneakyThrows
     @PostMapping(value = "verifypin-login")
     public ResponseEntity<?> verifyPinLogin(@Valid @RequestBody RequestVerifyPinLogin requestVerifyPinLogin, HttpSession httpSession) throws JsonProcessingException {
+        System.out.println(requestVerifyPinLogin);
         String response = rpcPublisher.sendMessage(memberQueueName.getVerifyPin(), objectMapper.writeValueAsString(requestVerifyPinLogin));
         responseWrapper.setResponse(response);
         responseWrapper.setSession(httpSession);
-        responseWrapper.setStrategy("setCredentials");
+        responseWrapper.setStrategy(memberQueueName.getVerifyPin());
 //        System.out.println(httpSession.getAttribute("userId"));
 //        httpSession.setAttribute("userId", 1);
          return responseWrapper.responseEntity();
@@ -71,7 +76,8 @@ public class MemberServiceController {
     }
 
     @GetMapping(value = "/profile")
-    public ResponseEntity<?> getProfile(HttpSession httpSession) {
+    public ResponseEntity<?> getProfile(HttpSession httpSession, Principal principal) {
+        System.out.println("From principal get " + principal.getName());
         String response = rpcPublisher.sendMessage(memberQueueName.getGetProfile(), String.valueOf(httpSession.getAttribute("userId")));
         responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
@@ -88,7 +94,7 @@ public class MemberServiceController {
     public ResponseEntity<?> forgotPinOtp(@Valid @RequestBody RequestUserId requestUserId) {
         String response = rpcPublisher.sendMessage(memberQueueName.getSendOTP(), String.valueOf(requestUserId.getId()));
         responseWrapper.setResponse(response);
-        responseWrapper.setStrategy("forgotPinSendOtp");
+        responseWrapper.setStrategy(memberQueueName.getSendOTP());
         return responseWrapper.responseEntity();
     }
 
@@ -105,7 +111,7 @@ public class MemberServiceController {
         String response = rpcPublisher.sendMessage(memberQueueName.getVerifyOTP(), objectMapper.writeValueAsString(requestVerifyOtp));
         responseWrapper.setResponse(response);
         responseWrapper.setSession(httpSession);
-        responseWrapper.setStrategy("verifyOtp");
+        responseWrapper.setStrategy(memberQueueName.getVerifyOTP());
         return responseWrapper.responseEntity();
     }
 
@@ -119,11 +125,21 @@ public class MemberServiceController {
         return responseWrapper.responseEntity();
     }
 
-    @DeleteMapping(value = "/logout")
-    public ResponseEntity<?> logout(HttpSession httpSession) {
-        httpSession.invalidate();
-        return new ResponseEntity<>(objectMapper.createObjectNode().put("code", 200).put("message", "success"), HttpStatus.OK);
-    }
+//    @DeleteMapping(value = "/logout")
+//    public ResponseEntity<?> logout(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+////        httpSession.invalidate();
+//        System.out.println("Manual Logout");
+//        HttpSession session= httpServletRequest.getSession(false);
+//        SecurityContextHolder.clearContext();
+//        session= httpServletRequest.getSession(false);
+//        if(session != null) {
+//            session.invalidate();
+//        }
+//        for(Cookie cookie : httpServletRequest.getCookies()) {
+//            cookie.setMaxAge(0);
+//        }
+//        return new ResponseEntity<>(objectMapper.createObjectNode().put("code", 200).put("message", "success"), HttpStatus.OK);
+//    }
 
     @GetMapping(value = "/otp/{id}")
     public ResponseEntity<?> getBalance(@PathVariable("id") @NotNull(message = "ID must not be null") int id) {

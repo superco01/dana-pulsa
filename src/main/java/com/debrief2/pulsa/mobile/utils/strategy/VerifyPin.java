@@ -10,23 +10,23 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpSession;
 
 @Component
-public class VerifyOTP implements Strategy {
+public class VerifyPin implements Strategy {
 
     @Override
     public ResponseEntity<?> wrap(HttpSession session,
                                   JsonNode jsonNode,
                                   int code,
                                   String message) {
-        System.out.println("VerifyOtp");
+        System.out.println("SetCredentials");
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode objectNode = objectMapper.createObjectNode();
-        session.setAttribute("userId", jsonNode.get("userId"));
+        session.setAttribute("userId", jsonNode.get("id"));
         objectNode.put("code", code).put("message", message);
         return new ResponseEntity<>(objectNode, HttpStatus.OK);
     }
 
     @Override
     public String getStrategyName() {
-        return "verifyOTP";
+        return "setCredentials";
     }
 }
