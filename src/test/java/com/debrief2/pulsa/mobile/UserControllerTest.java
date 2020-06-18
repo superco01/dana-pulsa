@@ -20,8 +20,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.web.servlet.MockMvc;
-import org.zalando.problem.ProblemModule;
-import org.zalando.problem.violations.ConstraintViolationProblemModule;
+//import org.zalando.problem.ProblemModule;
+//import org.zalando.problem.violations.ConstraintViolationProblemModule;
 
 import java.util.ArrayList;
 import java.util.List;
