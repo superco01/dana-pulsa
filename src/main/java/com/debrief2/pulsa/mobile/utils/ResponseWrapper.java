@@ -31,11 +31,6 @@ public class ResponseWrapper {
     @Autowired
     Map<String, Strategy> strategyMap;
 
-//    @Autowired
-//    public ResponseWrapper(String response) {
-//        this.response = response;
-//    }
-
     public ResponseEntity<?> responseEntity() {
 //        session.setAttribute("userId", 123);
         ObjectMapper objectMapper = new ObjectMapper();
