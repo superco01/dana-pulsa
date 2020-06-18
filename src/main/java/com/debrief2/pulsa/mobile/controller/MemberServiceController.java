@@ -4,16 +4,12 @@ import com.debrief2.pulsa.mobile.model.dto.*;
 import com.debrief2.pulsa.mobile.utils.ResponseWrapper;
 import com.debrief2.pulsa.mobile.utils.rpc.RpcPublisher;
 import com.debrief2.pulsa.mobile.utils.rpc.queuename.MemberQueueName;
-import com.debrief2.pulsa.mobile.utils.rpc.queuename.OrderQueueName;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -31,6 +27,9 @@ public class MemberServiceController {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    ResponseWrapper responseWrapper;
+
 //    RpcPublisher rpcPublisher;
 //
 //    {
@@ -41,21 +40,20 @@ public class MemberServiceController {
 //        }
 //    }
 
-//    @SneakyThrows
     @PostMapping(value = "/register")
     public ResponseEntity<?> register(@Valid @RequestBody RequestRegister requestRegister, HttpSession httpSession) throws Exception{
         System.out.println("Request write as string = "+objectMapper.writeValueAsString(requestRegister));
         String response = rpcPublisher.sendMessage(memberQueueName.getRegister(), objectMapper.writeValueAsString(requestRegister));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
-        responseWrapper.setQueue("register");
+        responseWrapper.setResponse(response);
         responseWrapper.setSession(httpSession);
+        responseWrapper.setStrategy("setCredentials");
         return responseWrapper.responseEntity();
     }
 
     @GetMapping(value = "/login/{phone}")
     public ResponseEntity<?> login(@PathVariable("phone") @NotNull(message = "phone must not be null") String phone) {
         String response = rpcPublisher.sendMessage(memberQueueName.getLogin(), phone);
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
@@ -63,42 +61,41 @@ public class MemberServiceController {
     @PostMapping(value = "verifypin-login")
     public ResponseEntity<?> verifyPinLogin(@Valid @RequestBody RequestVerifyPinLogin requestVerifyPinLogin, HttpSession httpSession) throws JsonProcessingException {
         String response = rpcPublisher.sendMessage(memberQueueName.getVerifyPin(), objectMapper.writeValueAsString(requestVerifyPinLogin));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         responseWrapper.setSession(httpSession);
-        responseWrapper.setQueue("verifyPin");
+        responseWrapper.setStrategy("setCredentials");
 //        System.out.println(httpSession.getAttribute("userId"));
 //        httpSession.setAttribute("userId", 1);
-        return responseWrapper.responseEntity();
+         return responseWrapper.responseEntity();
 //        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/profile")
     public ResponseEntity<?> getProfile(HttpSession httpSession) {
         String response = rpcPublisher.sendMessage(memberQueueName.getGetProfile(), String.valueOf(httpSession.getAttribute("userId")));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
     @GetMapping(value = "/balance")
     public ResponseEntity<?> getBalance(HttpSession httpSession) {
         String response = rpcPublisher.sendMessage(memberQueueName.getGetBalance(), String.valueOf(httpSession.getAttribute("userId")));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
     @PostMapping(value = "/forgotpin-otp")
     public ResponseEntity<?> forgotPinOtp(@Valid @RequestBody RequestUserId requestUserId) {
         String response = rpcPublisher.sendMessage(memberQueueName.getSendOTP(), String.valueOf(requestUserId.getId()));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
-        responseWrapper.setQueue("forgotpin-otp");
+        responseWrapper.setResponse(response);
+        responseWrapper.setStrategy("forgotPinSendOtp");
         return responseWrapper.responseEntity();
     }
 
     @PostMapping(value = "/changepin-otp")
     public ResponseEntity<?> changePinOtp(HttpSession httpSession) {
         String response = rpcPublisher.sendMessage(memberQueueName.getSendOTP(), String.valueOf(httpSession.getAttribute("userId")));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
-        responseWrapper.setQueue("changepin-otp");
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
@@ -106,9 +103,9 @@ public class MemberServiceController {
     @PostMapping(value = "/verify-otp")
     public ResponseEntity<?> verifyOtp(@Valid @RequestBody RequestVerifyOtp requestVerifyOtp, HttpSession httpSession) {
         String response = rpcPublisher.sendMessage(memberQueueName.getVerifyOTP(), objectMapper.writeValueAsString(requestVerifyOtp));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         responseWrapper.setSession(httpSession);
-        responseWrapper.setQueue("verify-otp");
+        responseWrapper.setStrategy("verifyOtp");
         return responseWrapper.responseEntity();
     }
 
@@ -117,8 +114,8 @@ public class MemberServiceController {
     public ResponseEntity<?> changePin(@Valid @RequestBody RequestPin requestPin, HttpSession httpSession) {
         requestPin.setId(Long.parseLong(String.valueOf(httpSession.getAttribute("userId"))));
         String response = rpcPublisher.sendMessage(memberQueueName.getChangePin(), objectMapper.writeValueAsString(requestPin));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
-        responseWrapper.setQueue("change-pin");
+        responseWrapper.setResponse(response);
+//        responseWrapper.setQueue("change-pin");
         return responseWrapper.responseEntity();
     }
 
@@ -129,9 +126,9 @@ public class MemberServiceController {
     }
 
     @GetMapping(value = "/otp/{id}")
-    public ResponseEntity<?> getBalance(@PathVariable("id") @NotNull(message = "ID must not be null") String id) {
+    public ResponseEntity<?> getBalance(@PathVariable("id") @NotNull(message = "ID must not be null") int id) {
         String response = rpcPublisher.sendMessage(memberQueueName.getGetOTP(), String.valueOf(id));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 }

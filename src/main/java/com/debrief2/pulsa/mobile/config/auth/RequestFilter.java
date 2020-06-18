@@ -20,7 +20,7 @@ public class RequestFilter extends OncePerRequestFilter {
         String path = httpServletRequest.getRequestURI();
         System.out.println("Filter Request Path " + path);
         System.out.println("Filter Request " + session.getId());
-        System.out.println("Filter request "+session.getAttribute("userId"));
+        System.out.println("Filter Request "+session.getAttribute("userId"));
 //        session.setAttribute("userId", 1);
 
         if (session.getAttribute("userId") != null) {
@@ -31,7 +31,6 @@ public class RequestFilter extends OncePerRequestFilter {
                 path.equals("/api/register")  ||
                 path.equals("/api/forgotpin-otp") ||
                 path.equals("/api/verify-otp") ||
-//                path.equals("/api/change-pin") ||
                 path.contains("/api/otp/")) {
 //            session.setAttribute("userId", 1);
             filterChain.doFilter(httpServletRequest, httpServletResponse);

@@ -30,6 +30,9 @@ public class OrderServiceController {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private ResponseWrapper responseWrapper;
+
 //    RpcPublisher rpcPublisher;
 //
 //    {
@@ -43,14 +46,14 @@ public class OrderServiceController {
     @GetMapping(value = "/recent-number")
     public ResponseEntity<?> getRecentNumber(HttpSession httpSession) {
         String response = rpcPublisher.sendMessage(orderQueueName.getGetRecentNumber(), String.valueOf(httpSession.getAttribute("userId")));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
     @GetMapping(value = "/catalog/{phone}")
     public ResponseEntity<?> getCatalog(@PathVariable("phone") @NotNull(message = "phone must not be null") String phone) {
         String response = rpcPublisher.sendMessage(orderQueueName.getGetAllCatalog(), phone);
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
@@ -59,7 +62,7 @@ public class OrderServiceController {
     public ResponseEntity<?> order(@Valid @RequestBody RequestOrder requestOrder, HttpSession httpSession) {
         requestOrder.setUserId((String.valueOf(httpSession.getAttribute("userId"))));
         String response = rpcPublisher.sendMessage(orderQueueName.getCreateTransaction(), objectMapper.writeValueAsString(requestOrder));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         responseWrapper.setMessage("created");
         responseWrapper.setCode(201);
         return responseWrapper.responseEntity();    }
@@ -69,7 +72,7 @@ public class OrderServiceController {
     public ResponseEntity<?> pay(@Valid @RequestBody RequestPay requestPay, HttpSession httpSession) {
         requestPay.setUserId((String.valueOf(httpSession.getAttribute("userId"))));
         String response = rpcPublisher.sendMessage(orderQueueName.getPay(), objectMapper.writeValueAsString(requestPay));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
 //        responseWrapper.setCode(202);
         return responseWrapper.responseEntity();    }
 
@@ -78,7 +81,7 @@ public class OrderServiceController {
     public ResponseEntity<?> getTransactionInProgress(@PathVariable("page") @NotNull(message = "page must not be null") String page, HttpSession httpSession) {
         RequestHistory requestHistory = new RequestHistory((String.valueOf(httpSession.getAttribute("userId"))), page);
         String response = rpcPublisher.sendMessage(orderQueueName.getGetHistoryInProgress(), objectMapper.writeValueAsString(requestHistory));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();    }
 
     @SneakyThrows
@@ -86,7 +89,7 @@ public class OrderServiceController {
     public ResponseEntity<?> getTransactionCompleted(@PathVariable("page") @NotNull(message = "page must not be null") String page, HttpSession httpSession) {
         RequestHistory requestHistory = new RequestHistory((String.valueOf(httpSession.getAttribute("userId"))), page);
         String response = rpcPublisher.sendMessage(orderQueueName.getGetHistoryCompleted(), objectMapper.writeValueAsString(requestHistory));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
@@ -97,18 +100,18 @@ public class OrderServiceController {
         serviceReq.put("userId", String.valueOf(httpSession.getAttribute("userId"))).put("transactionId", id);
         String message = objectMapper.writeValueAsString(serviceReq);
         String response = rpcPublisher.sendMessage(orderQueueName.getGetTransactionByIdByUserId(), message);
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
     @SneakyThrows
-    @GetMapping(value = "/transaction/cancel/{id}")
+    @DeleteMapping(value = "/transaction/cancel/{id}")
     public ResponseEntity<?> cancelTransaction(@PathVariable("id") @NotNull(message = "transaction ID must not be null") long id, HttpSession httpSession) {
         ObjectNode serviceReq = objectMapper.createObjectNode();
         serviceReq.put("userId", String.valueOf(httpSession.getAttribute("userId"))).put("transactionId", id);
         String message = objectMapper.writeValueAsString(serviceReq);
         String response = rpcPublisher.sendMessage(orderQueueName.getCancel(), message);
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         responseWrapper.setMessage("deleted");
         return responseWrapper.responseEntity();
     }

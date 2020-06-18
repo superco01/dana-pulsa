@@ -44,15 +44,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="224d3028-d806-400f-84e8-16758d83f32c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/config/auth/RequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/config/auth/RequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/exception/CustomGlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/exception/CustomGlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestPay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestPay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestPin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestPin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestVerifyPinLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestVerifyPinLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestVoucher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/model/dto/RequestVoucher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/utils/rpc/RpcPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/utils/rpc/RpcPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/config/StrategyConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/config/StrategyConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/controller/OrderServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/controller/OrderServiceController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +55,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -83,13 +77,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.debrief2.pulsa.mobile.utils.strategy" />
       <recent name="com.debrief2.pulsa.mobile.model.dto" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MobileApplication">
     <configuration name="MobileApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.debrief2.pulsa.mobile.MobileApplication" />
       <module name="mobile" />
@@ -103,9 +98,42 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mobile" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.debrief2.pulsa.mobile.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.debrief2.pulsa.mobile" />
+      <option name="MAIN_CLASS_NAME" value="com.debrief2.pulsa.mobile.UserControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.shouldFetchOneUserById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mobile" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.debrief2.pulsa.mobile.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.debrief2.pulsa.mobile" />
+      <option name="MAIN_CLASS_NAME" value="com.debrief2.pulsa.mobile.UserControllerTest" />
+      <option name="METHOD_NAME" value="shouldFetchOneUserById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MobileApplication" />
+        <item itemvalue="JUnit.UserControllerTest" />
+        <item itemvalue="JUnit.UserControllerTest.shouldFetchOneUserById" />
       </list>
     </recent_temporary>
   </component>
@@ -135,70 +163,86 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser" timestamp="1591776690960">
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser" timestamp="1592385398014">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1591776690960" />
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1592385398014" />
     <state x="139" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591785523099">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="139" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900@0.0.1440.900" timestamp="1591785523099" />
-    <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592299560416">
+    <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592377595519">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1592299560416" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1592362352066">
-      <screen x="0" y="23" width="1440" height="832" />
+    <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1592377595519" />
+    <state width="475" height="466" key="DebuggerActiveHint" timestamp="1592448784266">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1592358036435" />
+    <state width="475" height="466" key="DebuggerActiveHint/0.0.1440.900@0.0.1440.900" timestamp="1592448784266" />
+    <state width="1398" height="304" key="GridCell.Tab.0.bottom" timestamp="1592448880383">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="304" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1592448880382" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.23.1440.831@0.23.1440.831" timestamp="1592296034913" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.23.1440.832@0.23.1440.832" timestamp="1592362352066" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.23.1440.833@0.23.1440.833" timestamp="1591946453470" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.23.1440.834@0.23.1440.834" timestamp="1592014174269" />
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.23.1440.834@0.23.1440.834" timestamp="1592406620204" />
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.23.1440.835@0.23.1440.835" timestamp="1592396953835" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.23.1440.836@0.23.1440.836" timestamp="1591684712052" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1592362352064">
-      <screen x="0" y="23" width="1440" height="832" />
+    <state width="1398" height="304" key="GridCell.Tab.0.center" timestamp="1592448880380">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1592358036433" />
+    <state width="1398" height="304" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1592448880380" />
     <state width="1398" height="245" key="GridCell.Tab.0.center/0.23.1440.831@0.23.1440.831" timestamp="1592296034910" />
     <state width="1398" height="245" key="GridCell.Tab.0.center/0.23.1440.832@0.23.1440.832" timestamp="1592362352064" />
     <state width="1398" height="245" key="GridCell.Tab.0.center/0.23.1440.833@0.23.1440.833" timestamp="1591946453466" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.23.1440.834@0.23.1440.834" timestamp="1592014174267" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.23.1440.834@0.23.1440.834" timestamp="1592406620201" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.23.1440.835@0.23.1440.835" timestamp="1592396953832" />
     <state width="1398" height="245" key="GridCell.Tab.0.center/0.23.1440.836@0.23.1440.836" timestamp="1591684712049" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1592362352051">
-      <screen x="0" y="23" width="1440" height="832" />
+    <state width="1398" height="304" key="GridCell.Tab.0.left" timestamp="1592448880379">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1592358036432" />
+    <state width="1398" height="304" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1592448880379" />
     <state width="1398" height="245" key="GridCell.Tab.0.left/0.23.1440.831@0.23.1440.831" timestamp="1592296034909" />
     <state width="1398" height="245" key="GridCell.Tab.0.left/0.23.1440.832@0.23.1440.832" timestamp="1592362352051" />
     <state width="1398" height="245" key="GridCell.Tab.0.left/0.23.1440.833@0.23.1440.833" timestamp="1591946453464" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.23.1440.834@0.23.1440.834" timestamp="1592014174265" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.23.1440.834@0.23.1440.834" timestamp="1592406620199" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.23.1440.835@0.23.1440.835" timestamp="1592396953830" />
     <state width="1398" height="245" key="GridCell.Tab.0.left/0.23.1440.836@0.23.1440.836" timestamp="1591684712046" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1592362352065">
-      <screen x="0" y="23" width="1440" height="832" />
+    <state width="1398" height="304" key="GridCell.Tab.0.right" timestamp="1592448880381">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1592358036434" />
+    <state width="1398" height="304" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1592448880381" />
     <state width="1398" height="245" key="GridCell.Tab.0.right/0.23.1440.831@0.23.1440.831" timestamp="1592296034912" />
     <state width="1398" height="245" key="GridCell.Tab.0.right/0.23.1440.832@0.23.1440.832" timestamp="1592362352065" />
     <state width="1398" height="245" key="GridCell.Tab.0.right/0.23.1440.833@0.23.1440.833" timestamp="1591946453468" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.23.1440.834@0.23.1440.834" timestamp="1592014174268" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.23.1440.834@0.23.1440.834" timestamp="1592406620202" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.23.1440.835@0.23.1440.835" timestamp="1592396953834" />
     <state width="1398" height="245" key="GridCell.Tab.0.right/0.23.1440.836@0.23.1440.836" timestamp="1591684712050" />
-    <state width="1398" height="304" key="GridCell.Tab.1.bottom" timestamp="1591688973928">
+    <state width="1398" height="304" key="GridCell.Tab.1.bottom" timestamp="1592448824503">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="304" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1591688973928" />
-    <state width="1398" height="304" key="GridCell.Tab.1.center" timestamp="1591688973926">
+    <state width="1398" height="304" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1592448824503" />
+    <state width="1398" height="304" key="GridCell.Tab.1.bottom/0.23.1440.833@0.23.1440.833" timestamp="1592448763402" />
+    <state width="1398" height="304" key="GridCell.Tab.1.bottom/0.23.1440.834@0.23.1440.834" timestamp="1592387604512" />
+    <state width="1398" height="304" key="GridCell.Tab.1.center" timestamp="1592448824501">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="304" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1591688973926" />
-    <state width="1398" height="304" key="GridCell.Tab.1.left" timestamp="1591688973925">
+    <state width="1398" height="304" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1592448824501" />
+    <state width="1398" height="304" key="GridCell.Tab.1.center/0.23.1440.833@0.23.1440.833" timestamp="1592448763399" />
+    <state width="1398" height="304" key="GridCell.Tab.1.center/0.23.1440.834@0.23.1440.834" timestamp="1592387604511" />
+    <state width="1398" height="304" key="GridCell.Tab.1.left" timestamp="1592448824499">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="304" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1591688973925" />
-    <state width="1398" height="304" key="GridCell.Tab.1.right" timestamp="1591688973927">
+    <state width="1398" height="304" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1592448824499" />
+    <state width="1398" height="304" key="GridCell.Tab.1.left/0.23.1440.833@0.23.1440.833" timestamp="1592448763395" />
+    <state width="1398" height="304" key="GridCell.Tab.1.left/0.23.1440.834@0.23.1440.834" timestamp="1592387604510" />
+    <state width="1398" height="304" key="GridCell.Tab.1.right" timestamp="1592448824502">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="304" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1591688973927" />
+    <state width="1398" height="304" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1592448824502" />
+    <state width="1398" height="304" key="GridCell.Tab.1.right/0.23.1440.833@0.23.1440.833" timestamp="1592448763400" />
+    <state width="1398" height="304" key="GridCell.Tab.1.right/0.23.1440.834@0.23.1440.834" timestamp="1592387604512" />
     <state x="418" y="176" width="604" height="548" key="find.popup" timestamp="1592299800827">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -211,5 +255,41 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="112" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1591865483382" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/utils/strategy/VerifyOtp.java</url>
+          <line>8</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/utils/ResponseWrapper.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/utils/ResponseWrapper.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/utils/ResponseWrapper.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/controller/MemberServiceController.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/debrief2/pulsa/mobile/controller/MemberServiceController.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

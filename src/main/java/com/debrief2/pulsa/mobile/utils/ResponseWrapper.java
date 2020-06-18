@@ -2,106 +2,66 @@ package com.debrief2.pulsa.mobile.utils;
 
 import com.debrief2.pulsa.mobile.utils.errors.ErrorCodeValue;
 import com.debrief2.pulsa.mobile.utils.errors.ErrorList;
+import com.debrief2.pulsa.mobile.utils.strategy.Strategy;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Data
+@Component
 public class ResponseWrapper {
-    private int status;
+    private JsonNode jsonNode;
     private String message = "success";
     private int code = 200;
-    private JsonNode data;
     private String response;
     private HttpSession session;
-    private String queue = "";
-//
+    private String strategy;
+
+    @Autowired
+    Map<String, Strategy> strategyMap;
+
 //    @Autowired
-//    ErrorList errorList;
+//    public ResponseWrapper(String response) {
+//        this.response = response;
+//    }
 
-    public ResponseWrapper(String response) {
-        this.response = response;
-    }
-
-    public ResponseEntity<?> responseEntity () {
-//    public ObjectNode getResult() {
-//        ErrorList errorListTest = new ErrorList();
-//        Map<String, ErrorCodeValue> errorCodeValuesTest = errorListTest.getErrorCodeValueMap();
-//        System.out.println("get from status "+errorCodeValuesTest.get("unknown phone number").getStatus());
-//        System.out.println(session.getId());
+    public ResponseEntity<?> responseEntity() {
 //        session.setAttribute("userId", 123);
-//        System.out.println("get session in wrapper"+session.getAttribute("userId"));
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode objectNode = objectMapper.createObjectNode();
-        System.out.println("RESPONSE MESSAGE = "+response);
+        System.out.println("RESPONSE MESSAGE = " + response);
         try {
-            JsonNode jsonNode = objectMapper.readTree(response);
-            if (queue.equals("verifyPin") && jsonNode.get("email") != null) {
-                session.setAttribute("userId", jsonNode.get("id"));
-                objectNode.put("code", code).put("message", message);
-                return new ResponseEntity<>(objectNode, HttpStatus.OK);
-            }
-            else if(queue.equals("change-pin")) {
-                ErrorList errorList = new ErrorList();
-                ErrorCodeValue errorCodeValue = errorList.getErrorCodeValueMap().get(response);
-                if (errorCodeValue != null) {
-                    objectNode.put("code", errorCodeValue.getStatus()).put("message", errorCodeValue.getMessage());
-                    return new ResponseEntity<>(objectNode, errorCodeValue.getHttpStatusCode());
-                }
-                objectNode.put("code", code).put("message", message);
-                return new ResponseEntity<>(objectNode, HttpStatus.OK);
-            }
-            else if(queue.equals("verify-otp")) {
-                session.setAttribute("userId", jsonNode.get("userId"));
-                objectNode.put("code", code).put("message", message);
-                return new ResponseEntity<>(objectNode, HttpStatus.OK);
-            }
-            else if (queue.equals("forgotpin-otp")) {
-                objectNode.put("code", code).put("message", message);
-                return new ResponseEntity<>(objectNode, HttpStatus.OK);
-            }
-            else if (queue.equals("register") && jsonNode.get("email") != null) {
-                session.setAttribute("userId", jsonNode.get("id"));
-                objectNode.put("code", 201).put("message", "created");
-                return new ResponseEntity<>(objectNode, HttpStatus.OK);
-            }
-            else {
-                objectNode.put("code", code).put("message", message).set("data", jsonNode);
-                return new ResponseEntity<>(objectNode, message == "created"?HttpStatus.CREATED:HttpStatus.OK);
-            }
+            jsonNode = objectMapper.readTree(response);
+            return strategyMap.get(strategy).wrap(session, jsonNode, code, message);
+        } catch (NullPointerException e) {
+            objectNode.put("code", code).put("message", message).set("data", jsonNode);
+            return new ResponseEntity<>(objectNode, message == "created" ? HttpStatus.CREATED : HttpStatus.OK);
         } catch (JsonProcessingException e) {
-            System.out.println("Catch");
             ErrorList errorList = new ErrorList();
             ErrorCodeValue errorCodeValue = errorList.getErrorCodeValueMap().get(response);
-            if(queue.equals("change-pin")) {
-//                ErrorList errorList = new ErrorList();
-//                ErrorCodeValue errorCodeValue = errorList.getErrorCodeValueMap().get(response);
-                if (errorCodeValue != null) {
-                    objectNode.put("code", errorCodeValue.getStatus()).put("message", errorCodeValue.getMessage());
-                    return new ResponseEntity<>(objectNode, errorCodeValue.getHttpStatusCode());
-                }
-                objectNode.put("code", code).put("message", response);
-                return new ResponseEntity<>(objectNode, HttpStatus.OK);
-            }
-            else if (errorCodeValue != null) {
+            if (errorCodeValue != null) {
                 objectNode.put("code", errorCodeValue.getStatus()).put("message", errorCodeValue.getMessage());
                 return new ResponseEntity<>(objectNode, errorCodeValue.getHttpStatusCode());
             } else {
                 objectNode.put("code", 500).put("message", response);
                 return new ResponseEntity<>(objectNode, HttpStatus.INTERNAL_SERVER_ERROR);
             }
+        } finally {
+            strategy = null;
+            session = null;
+            code = 200;
+            message = "success";
         }
-//        return objectNode;
-//    }
-//
-//    public ResponseEntity<?> responseEntity () {
-//        return new ResponseEntity<>(objectNode, HttpStatus.OK);
     }
 }

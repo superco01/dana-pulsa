@@ -2,6 +2,7 @@ package com.debrief2.pulsa.mobile.model.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class RequestVerifyPinLogin {
     @NotBlank(message = "id must not be null")
-//    @NotEmpty(message = "empty")
+    @Digits(message = "invalid request format", integer = 100, fraction = 0)
     private String id;
     @NotBlank(message = "pin must not be null")
     private String pin;

@@ -27,56 +27,71 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    private String INCORRECT_REQUEST = "INCORRECT_REQUEST";
-    private String BAD_REQUEST = "BAD_REQUEST";
+public class CustomGlobalExceptionHandler {
 
-//    @ExceptionHandler(UnexpectedTypeException.class)
-//    public Object springHandleNotFound(UnexpectedTypeException ex) {
-//        System.out.println("handled in controller advice");
-//        return ex;
-//    }
-//
-//    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-//    public Object handleValidationExceptions(MethodArgumentTypeMismatchException ex) {
-//        return ex.getLocalizedMessage();
-//    }
-//
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public Object handleValidationExceptions(MethodArgumentNotValidException ex) {
-//        return ex.getBindingResult()
-//                .getFieldErrors()
-//                .stream()
-//                .map(x -> x.getDefaultMessage())
-//                .collect(Collectors.toList());
-//    }
-//
-//    @ExceptionHandler(ResponseStatusException.class)
-//    public Object handel(ResponseStatusException ex) {
-//        System.out.println("controller advice filter ex thorw");
-//        return ex.getMessage();
-//    }
-
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status, WebRequest request) {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         System.out.println("Controller Advice");
         Map<String, Object> body = new LinkedHashMap<>();
-//        body.put("timestamp", new Date());
-        body.put("code", status.value());
-
+        body.put("code", 400);
         //Get all errors
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(x -> x.getDefaultMessage())
                 .collect(Collectors.toList());
-
         body.put("message", errors);
-
-        return new ResponseEntity<>(body, headers, status);
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<?> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        System.out.println("Controller Advice");
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("code", 400);
+        body.put("message", "invalid request format");
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UnexpectedTypeException.class)
+    public ResponseEntity<?> handleUnexpectedTypeException(UnexpectedTypeException ex) {
+        System.out.println("handled in controller advice");
+        System.out.println("Controller Advice");
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("code", 400);
+        body.put("message", "invalid data type");
+        return new ResponseEntity<>(ex, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public Object handle(HttpMessageNotReadableException ex) {
+        System.out.println("controller advice filter ex thorw");
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("code", 400);
+        body.put("message", "invalid request format");
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+//                                                                  HttpHeaders headers,
+//                                                                  HttpStatus status, WebRequest request) {
+//        System.out.println("Controller Advice");
+//        Map<String, Object> body = new LinkedHashMap<>();
+////        body.put("timestamp", new Date());
+//        body.put("code", status.value());
+//
+//        //Get all errors
+//        List<String> errors = ex.getBindingResult()
+//                .getFieldErrors()
+//                .stream()
+//                .map(x -> x.getDefaultMessage())
+//                .collect(Collectors.toList());
+//
+//        body.put("message", errors);
+//
+//        return new ResponseEntity<>(body, headers, status);
+//    }
 
 //    @ExceptionHandler(InvalidFormatException.class)
 //    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,

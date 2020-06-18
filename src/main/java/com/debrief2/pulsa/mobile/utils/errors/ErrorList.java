@@ -34,7 +34,7 @@ public class ErrorList {
         errorCodeValueMap.put("voucher not found", new ErrorCodeValue("voucher not found", 404, HttpStatus.NOT_FOUND));
         //Member Domain
         errorCodeValueMap.put("invalid email", new ErrorCodeValue("invalid email", 400, HttpStatus.BAD_REQUEST));
-//        errorCodeValueList.add(new ErrorCodeValue("invalid phone number", 400, HttpStatus.BAD_REQUEST));
+        errorCodeValueMap.put("invalid request format", new ErrorCodeValue("invalid request format", 400, HttpStatus.BAD_REQUEST));
         errorCodeValueMap.put("invalid pin", new ErrorCodeValue("invalid pin", 400, HttpStatus.BAD_REQUEST));
         errorCodeValueMap.put("user already exist", new ErrorCodeValue("user already exist", 409, HttpStatus.CONFLICT));
         errorCodeValueMap.put("incorrect phone number", new ErrorCodeValue("incorrect phone number", 404, HttpStatus.NOT_FOUND));
@@ -45,5 +45,6 @@ public class ErrorList {
         errorCodeValueMap.put("OTP expired", new ErrorCodeValue("OTP expired", 401, HttpStatus.UNAUTHORIZED));
         errorCodeValueMap.put("OTP not found", new ErrorCodeValue("OTP not found", 404, HttpStatus.NOT_FOUND));
         errorCodeValueMap.put("user session not found", new ErrorCodeValue("user session not found", 404, HttpStatus.NOT_FOUND));
+        errorCodeValueMap.put("updated", new ErrorCodeValue("updated", 200, HttpStatus.OK));
     }
 }

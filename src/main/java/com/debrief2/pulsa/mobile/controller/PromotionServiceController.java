@@ -37,6 +37,9 @@ public class PromotionServiceController {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private ResponseWrapper responseWrapper;
 //
 //    RpcPublisher rpcPublisher;
 //
@@ -53,7 +56,7 @@ public class PromotionServiceController {
     public ResponseEntity<?> myVoucher(@PathVariable("page") @NotNull(message = "page must not be null") int page, HttpSession httpSession) {
         RequestVoucher requestVoucher = new RequestVoucher(Long.parseLong(String.valueOf(httpSession.getAttribute("userId"))), page);
         String response = rpcPublisher.sendMessage(promotionQueueName.getGetMyVoucher(), objectMapper.writeValueAsString(requestVoucher));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
@@ -63,7 +66,7 @@ public class PromotionServiceController {
         RequestVoucherRecommendation requestVoucherRecommendation = new RequestVoucherRecommendation(Long.parseLong(String.valueOf(httpSession.getAttribute("userId"))), transactionId);
         requestVoucherRecommendation.setUserId(Long.parseLong(String.valueOf(httpSession.getAttribute("userId"))));
         String response = rpcPublisher.sendMessage(promotionQueueName.getGetVoucherRecommendation(), objectMapper.writeValueAsString(requestVoucherRecommendation));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
@@ -72,7 +75,7 @@ public class PromotionServiceController {
     public ResponseEntity<?> voucherPromotion(@PathVariable("page") @NotNull(message = "page must not be null") int page, HttpSession httpSession) {
         RequestVoucher requestVoucher = new RequestVoucher(Long.parseLong(String.valueOf(httpSession.getAttribute("userId"))), page);
         String response = rpcPublisher.sendMessage(promotionQueueName.getGetVoucherPromotion(), objectMapper.writeValueAsString(requestVoucher));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 
@@ -80,7 +83,7 @@ public class PromotionServiceController {
     @GetMapping(value = "/vouchers/details/{voucherId}")
     public ResponseEntity<?> voucherDetails(@PathVariable("voucherId") @NotNull(message = "voucher ID must not be null") int voucherId) {
         String response = rpcPublisher.sendMessage(promotionQueueName.getGetVoucherDetail(), String.valueOf(voucherId));
-        ResponseWrapper responseWrapper = new ResponseWrapper(response);
+        responseWrapper.setResponse(response);
         return responseWrapper.responseEntity();
     }
 }
