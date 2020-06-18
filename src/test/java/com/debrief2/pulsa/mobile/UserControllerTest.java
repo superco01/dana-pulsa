@@ -1,5 +1,6 @@
 package com.debrief2.pulsa.mobile;
 
+import com.debrief2.pulsa.mobile.controller.MemberServiceController;
 import com.debrief2.pulsa.mobile.model.User;
 import com.debrief2.pulsa.mobile.utils.rpc.RpcPublisher;
 import com.debrief2.pulsa.mobile.utils.rpc.queuename.MemberQueueName;
@@ -10,11 +11,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.web.servlet.MockMvc;
-//import org.zalando.problem.ProblemModule;
-//import org.zalando.problem.violations.ConstraintViolationProblemModule;
+import org.zalando.problem.ProblemModule;
+import org.zalando.problem.violations.ConstraintViolationProblemModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +72,20 @@ class UserControllerTest {
     }
 
 //    @Test
+//    void shouldCreateNewUser() throws Exception {
+//        given(userService.createUser(any(User.class))).willAnswer((invocation) -> invocation.getArgument(0));
+//        User user = new User(null, "newuser1@gmail.com", "pwd", "Name");
+//        this.mockMvc.perform(post("/api/users")
+//                .contentType(MediaType.APPLICATION_JSON_UTF8)
+//                .content(objectMapper.writeValueAsString(user)))
+//                .andExpect(status().isCreated())
+//                .andExpect(jsonPath("$.email", is(user.getEmail())))
+//                .andExpect(jsonPath("$.password", is(user.getPassword())))
+//                .andExpect(jsonPath("$.name", is(user.getName())))
+//        ;
+//    }
+
+//    @Test
 //    void shouldLoginSuccess() throws Exception {
 //
 //        given(rpcPublisher.sendMessage("login", "081373951739")).willReturn(String.valueOf(userList.get(1)));
@@ -82,7 +103,7 @@ class UserControllerTest {
 
         given(rpcPublisher.sendMessage("login", "081373951739")).willReturn(String.valueOf(Optional.of(user)));
 
-        this.mockMvc.perform(get("/api/users/{id}", "081373951739"))
+        this.mockMvc.perform(get("/api/login/{id}", "081373951739"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email", is(user.getEmail())))
                 .andExpect(jsonPath("$.name", is(user.getName())));
