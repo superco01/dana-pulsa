@@ -40,7 +40,7 @@ public class CustomGlobalExceptionHandler {
                 .stream()
                 .map(x -> x.getDefaultMessage())
                 .collect(Collectors.toList());
-        body.put("message", errors);
+        body.put("message", errors.get(0));
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
