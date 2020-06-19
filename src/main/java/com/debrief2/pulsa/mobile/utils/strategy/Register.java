@@ -21,7 +21,7 @@ public class Register implements Strategy {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode objectNode = objectMapper.createObjectNode();
         session.setAttribute("userId", jsonNode.get("id"));
-        objectNode.put("code", 201).put("message", message).set("data", jsonNode);
+        objectNode.put("code", 201).put("message", "created").set("data", jsonNode);
         return new ResponseEntity<>(objectNode, HttpStatus.CREATED);
     }
 
