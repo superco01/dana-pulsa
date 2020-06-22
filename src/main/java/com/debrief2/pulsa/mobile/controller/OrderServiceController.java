@@ -71,6 +71,7 @@ public class OrderServiceController {
     @PostMapping(value = "/pay")
     public ResponseEntity<?> pay(@Valid @RequestBody RequestPay requestPay, HttpSession httpSession) {
         requestPay.setUserId((String.valueOf(httpSession.getAttribute("userId"))));
+        System.out.println("PAY REQUEST " + requestPay);
         String response = rpcPublisher.sendMessage(orderQueueName.getPay(), objectMapper.writeValueAsString(requestPay));
         responseWrapper.setResponse(response);
 //        responseWrapper.setCode(202);
