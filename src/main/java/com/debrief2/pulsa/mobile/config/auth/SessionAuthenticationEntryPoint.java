@@ -18,7 +18,6 @@ public class SessionAuthenticationEntryPoint implements AuthenticationEntryPoint
     public void commence(HttpServletRequest httpServletRequest,
                          HttpServletResponse httpServletResponse,
                          AuthenticationException e) throws IOException, ServletException {
-        System.out.println("USER CREDENTIALS FAILED");
         httpServletResponse.setContentType("application/json");
         httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         ObjectMapper objectMapper = new ObjectMapper();

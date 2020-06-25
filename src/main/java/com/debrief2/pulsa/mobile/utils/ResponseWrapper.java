@@ -14,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Data
@@ -32,7 +30,6 @@ public class ResponseWrapper {
     Map<String, Strategy> strategyMap;
 
     public ResponseEntity<?> responseEntity() {
-//        session.setAttribute("userId", 123);
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode objectNode = objectMapper.createObjectNode();
         System.out.println("RESPONSE MESSAGE = " + response);

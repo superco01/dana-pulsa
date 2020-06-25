@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 
 @Data
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class RequestHistory {
     @NotBlank(message = "user id must not be null")
-    @Digits(message = "invalid request format", integer = 100, fraction = 0)
     private String userId;
     @NotBlank(message = "page cannot be null")
     private String page;

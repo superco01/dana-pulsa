@@ -11,7 +11,6 @@ import java.util.Map;
 @Data
 public class ErrorList {
     private Map<String, ErrorCodeValue> errorCodeValueMap = new HashMap<String, ErrorCodeValue>();
-//    private Map<String, ErrorCodeValue> errorCodeValueMap = new HashMap<String, ErrorCodeValue>();
 
     public ErrorList() {
         //Order Domain
@@ -25,7 +24,6 @@ public class ErrorList {
         errorCodeValueMap.put("unknown method", new ErrorCodeValue("unknown method", 404, HttpStatus.NOT_FOUND));
         errorCodeValueMap.put("voucher you want to redeem is either not found, has been used or already expired", new ErrorCodeValue("voucher you want to redeem is either not found, has been used or already expired", 400, HttpStatus.BAD_REQUEST));
         errorCodeValueMap.put("unknown voucher", new ErrorCodeValue("unknown voucher", 404, HttpStatus.NOT_FOUND));
-//        errorCodeValueMap.put("unknown transaction", new ErrorCodeValue("unknown transaction", 404, HttpStatus.NOT_FOUND));
         errorCodeValueMap.put("can't cancel completed transaction", new ErrorCodeValue("can't cancel completed transaction", 400, HttpStatus.BAD_REQUEST));
         //Promotion Domain
         errorCodeValueMap.put("you don’t have any vouchers", new ErrorCodeValue("you don’t have any vouchers", 404, HttpStatus.NOT_FOUND));

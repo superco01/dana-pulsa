@@ -58,16 +58,16 @@
       <artifactId>spring-rabbit</artifactId>
 <!--      <version>1.4.5.RELEASE</version>-->
     </dependency>
-<!--&lt;!&ndash;    Session Redis&ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.session</groupId>-->
-<!--      <artifactId>spring-session-data-redis</artifactId>-->
-<!--    </dependency>-->
-<!--&lt;!&ndash;    Redis&ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.boot</groupId>-->
-<!--      <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--    </dependency>-->
+<!--    Session Redis-->
+    <dependency>
+      <groupId>org.springframework.session</groupId>
+      <artifactId>spring-session-data-redis</artifactId>
+    </dependency>
+<!--    Redis-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
 <!--    Validation-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -84,6 +84,13 @@
           <artifactId>junit-vintage-engine</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+<!--    Spring Security for Testing-->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <version>4.2.2.RELEASE</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

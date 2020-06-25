@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestVoucher {
-//    @NotBlank(message = "user id must not be null")
     private long userId;
     @NotBlank(message = "page must not be null")
     private int page;

@@ -24,9 +24,4 @@ public class Register implements Strategy {
         objectNode.put("code", 201).put("message", "created").set("data", jsonNode);
         return new ResponseEntity<>(objectNode, HttpStatus.CREATED);
     }
-
-    @Override
-    public String getStrategyName() {
-        return "register";
-    }
 }

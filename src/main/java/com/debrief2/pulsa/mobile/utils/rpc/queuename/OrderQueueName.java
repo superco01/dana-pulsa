@@ -3,8 +3,6 @@ package com.debrief2.pulsa.mobile.utils.rpc.queuename;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-
 @Component
 @Data
 public class OrderQueueName {

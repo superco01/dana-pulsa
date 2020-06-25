@@ -8,6 +8,5 @@ import javax.servlet.http.HttpSession;
 
 public interface Strategy {
     ResponseEntity<?> wrap(HttpSession session, JsonNode jsonNode, int code, String message);
-    String getStrategyName();
 }
 

@@ -5,13 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestPay {
-//    @NotBlank(message = "user id must not be null")
     private String userId;
     @NotBlank(message = "transaction ID must not be null")
     private String transactionId;

@@ -24,9 +24,4 @@ public class VerifyPin implements Strategy {
         objectNode.put("code", code).put("message", message);
         return new ResponseEntity<>(objectNode, HttpStatus.OK);
     }
-
-    @Override
-    public String getStrategyName() {
-        return "verifyPin";
-    }
 }
