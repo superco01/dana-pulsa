@@ -50,7 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers(allowedUrl).permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
-                .sessionManagement().maximumSessions(1).and().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+//                .sessionManagement().maximumSessions(1).and().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+                .sessionManagement().sessionFixation().none();
         httpSecurity.logout().clearAuthentication(true).invalidateHttpSession(true).deleteCookies("SESSION").logoutSuccessHandler(logoutSuccessHandler());
         httpSecurity.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
     }
